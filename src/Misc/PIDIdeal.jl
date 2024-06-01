@@ -117,3 +117,10 @@ function is_one(x::PIDIdeal{T}) where {T}
 end
 
 is_zero(x::PIDIdeal) = is_zero(gen(x))
+
+quo(R::Ring, I::PIDIdeal) = quo(R, gen(I))
+quo(::Type{Field}, R::Ring, I::PIDIdeal) = quo(Field, R, gen(I))
+
+Base.in(f::RingElem, I::PIDIdeal) = divides(f, gen(I)) |> first
+
+coordinates(f::T, I::PIDIdeal{T}) where {T<:RingElem} = T[divrem(f, gen(I))...]
