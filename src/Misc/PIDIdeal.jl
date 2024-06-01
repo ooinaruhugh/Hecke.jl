@@ -74,7 +74,7 @@ function ==(I::PIDIdeal{T}, J::PIDIdeal{T}) where {T}
   if _can_canonicalize(T)
     return I.gen == J.gen
   else
-    return divides(I.gen, J.gen) && divides(J.gen, I.gen)
+      return first(divides(I.gen, J.gen)) && first(divides(J.gen, I.gen))
   end
 end
 
